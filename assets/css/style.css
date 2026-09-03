@@ -538,6 +538,24 @@ a { color: var(--ouro-forte); }
   text-transform: uppercase;
   margin: 0 0 .4em;
 }
+.kit__tag {
+  align-self: center;
+  background: var(--ouro-fraco);
+  color: var(--texto);
+  border-radius: var(--r-full);
+  padding: 5px 14px;
+  font-size: .72rem;
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  margin: 0 0 .6em;
+}
+.kit__nota {
+  font-size: .78rem;
+  line-height: 1.5;
+  color: var(--texto-2);
+  margin: 0 0 14px;
+}
 .kit__preco {
   font-family: var(--display);
   font-variant-numeric: lining-nums;

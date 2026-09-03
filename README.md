@@ -55,6 +55,24 @@ Na faixa logo abaixo do hero, os números marcados com
 `data-placeholder="confirmar com a cliente"` (por exemplo "+ de 300 festas
 montadas") também precisam ser confirmados antes de ir ao ar.
 
+## Os três pacotes e a regra de retirada
+
+Regra que vale para a página inteira: **os dois kits são de retirada**, o
+cliente busca no local. **Montagem no local existe só na Decoração Completa.**
+Se algum texto for reescrito, ele não pode prometer entrega nem montagem nos
+kits.
+
+| Pacote | Preço | Entrega |
+| --- | --- | --- |
+| Kit Festa na Mesa | R$ 85,00 | retirada no local |
+| Kit Festa na Mesa Completo | R$ 170,00 | retirada no local |
+| Decoração Completa | R$ 550,00 na promoção (de R$ 870,00) | montagem no local inclusa |
+
+**Tema fora do estoque** tem taxa cobrada pelo fornecedor: R$ 25,00 nos kits e
+R$ 80,00 na Decoração Completa. Isso aparece no `.kit__nota` de cada card, na
+linha de rodapé do bloco de kits e na pergunta "Posso escolher qualquer tema?"
+do FAQ. Se o valor mudar, atualize os quatro lugares.
+
 ## Promoção com prazo
 
 O card **Decoração Completa** está com a promoção "de R$ 870,00 por R$ 550,00",
