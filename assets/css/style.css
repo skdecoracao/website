@@ -353,10 +353,14 @@ a { color: var(--ouro-forte); }
   background: var(--creme-2);
   border: 1px solid var(--linha);
   box-shadow: var(--sombra-2);
-  aspect-ratio: 16 / 9;
+  /* as fotos da cliente são todas retrato, ~3:4 */
+  aspect-ratio: 4 / 5;
 }
-.moldura--quadrada { aspect-ratio: 1 / 1; border-radius: var(--r); }
-.moldura img { width: 100%; height: 100%; object-fit: cover; }
+.moldura img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 38%; }
+
+/* foto principal do hero: enquadra o painel, que fica na parte de cima */
+.moldura--hero { max-width: 430px; margin-inline: auto; }
+.moldura--hero img { object-position: 50% 34%; }
 
 /* imagem ausente: mantém a moldura creme e mostra a descrição */
 .sem-img img { display: none; }
@@ -386,6 +390,7 @@ a { color: var(--ouro-forte); }
   border: 1px solid var(--ouro);
   border-radius: var(--r-full);
   padding: 10px 16px;
+  max-width: calc(100% - 28px);
   font-size: .82rem;
   font-weight: 600;
   box-shadow: var(--sombra);
@@ -538,6 +543,22 @@ a { color: var(--ouro-forte); }
   text-transform: uppercase;
   margin: 0 0 .4em;
 }
+.kit__foto {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  border-radius: var(--r);
+  overflow: hidden;
+  border: 1px solid var(--linha);
+  background: var(--creme);
+  margin: 0 0 18px;
+}
+.kit__foto img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 40%;
+}
+
 .kit__tag {
   align-self: center;
   background: var(--ouro-fraco);
@@ -600,8 +621,11 @@ a { color: var(--ouro-forte); }
   color: var(--texto-2);
   border-top: 1px solid var(--linha);
   padding-top: 14px;
-  margin: auto 0 18px;
+  margin: 0 0 18px;
 }
+/* o texto fica todo junto no topo e só o CTA desce, para os botões
+   alinharem entre cards de alturas diferentes (o kit de R$ 85 não tem foto) */
+.kit > .botao { margin-top: auto; }
 .kit__ideal strong { color: var(--texto); }
 
 .kits__rodape {
@@ -987,7 +1011,7 @@ a { color: var(--ouro-forte); }
   .prova li { border-left: 1px solid var(--linha); }
   .prova li:first-child { border-left: 0; }
   .cartoes { grid-template-columns: repeat(2, 1fr); }
-  .galeria { grid-template-columns: repeat(2, 1fr); }
+  .galeria { grid-template-columns: repeat(3, 1fr); }
   .passos { grid-template-columns: repeat(3, 1fr); }
   .faixa__grade { grid-template-columns: repeat(2, 1fr); gap: 26px; }
   .rodape__grade { grid-template-columns: 1.2fr 1fr; align-items: center; }
@@ -1018,7 +1042,7 @@ a { color: var(--ouro-forte); }
 
   .cartoes { grid-template-columns: repeat(3, 1fr); }
   .kits { grid-template-columns: repeat(3, 1fr); gap: 26px; }
-  .galeria { grid-template-columns: repeat(4, 1fr); }
+  .galeria { grid-template-columns: repeat(3, 1fr); gap: 26px; }
 
   .quem { grid-template-columns: 300px 1fr; gap: 54px; }
   .retrato { width: 300px; }

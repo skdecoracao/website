@@ -86,15 +86,25 @@ Quando a promoção acabar, faça uma destas coisas:
 
 ## Imagens
 
-As fotos ficam em `assets/img/`. Se quiser trocar, mantenha os mesmos nomes de
-arquivo e as mesmas proporções:
+As fotos ficam em `assets/img/`. **São fotos reais de festas da SK**, enviadas
+pela cliente, e não imagens de banco nem geradas por IA. Todas são retrato,
+com 1280 px de altura.
 
-- `hero.jpg`, 16:9
-- `tema-infantil.jpg`, `tema-rosa.jpg`, `tema-cha-bebe.jpg`, `tema-adulto.jpg`, 1:1
-- `fundadora.png`, quadrada (aparece recortada em círculo)
+| Arquivo | Pacote e tema | Onde aparece |
+| --- | --- | --- |
+| `completa-tiana.jpg` | Decoração Completa, Princesa Tiana | hero, card da Decoração Completa, galeria e `og:image` |
+| `kit-completo-vingadores.jpg` | Kit Festa na Mesa Completo, Vingadores | card do Kit Completo e galeria |
+| `completa-looney.jpg` | Decoração Completa, 1 ano Looney Tunes baby | galeria |
+| `fundadora.png` | retrato da fundadora | bloco "Quem faz", recortado em círculo |
 
-Se alguma imagem faltar, a moldura fica em creme e mostra a descrição do `alt`,
-sem quebrar o layout.
+O Kit Festa na Mesa de R$ 85 ainda não tem foto: o card fica sem imagem de
+propósito, e não deve receber foto de outro pacote.
+
+Para trocar uma foto, mantenha o mesmo nome de arquivo e a proporção retrato,
+e atualize o `alt` e os atributos `width`/`height` no `index.html`. Se alguma
+imagem faltar, a moldura fica em creme e mostra a descrição do `alt`, sem
+quebrar o layout. O enquadramento é controlado pelo `object-position` em
+`.moldura img`, `.moldura--hero img` e `.kit__foto img`.
 
 ## Cores e fontes
 
