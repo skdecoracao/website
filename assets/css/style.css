@@ -1053,3 +1053,11 @@ a { color: var(--ouro-forte); }
 @media (min-width: 1024px) {
   .tabela { min-width: 0; }
 }
+
+/* Sobrancelha dentro do H1 (a palavra-chave principal fica no título para o Google) */
+h1 .sobrancelha {
+  display: block;
+  font-family: var(--corpo);
+  line-height: 1.6;
+  margin-bottom: .9rem;
+}
