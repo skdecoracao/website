@@ -119,3 +119,10 @@ suficiente para texto pequeno sobre o creme. Para texto pequeno em dourado use
 
 Projeto estático, pronto para a Vercel (o `vercel.json` já vem configurado) ou
 para qualquer hospedagem de arquivos estáticos, como o Cloudflare Pages.
+
+## Hospedagem e publicação
+
+- Site no ar em https://skdecoracao.com.br, pelo Cloudflare Pages da conta da Sarah (projeto `sk-decoracoes`).
+- Para publicar uma alteração: `./publicar-cloudflare.sh` (lê os tokens do cofre local, nunca do repositório).
+- `pos-dns.sh` foi o fechamento da migração do domínio (Search Console, sitemap, IndexNow e redirecionamento da Vercel antiga).
+- Não apagar `google7e5729a4f7b26562.html`, a meta `google-site-verification` nem o arquivo `.txt` do IndexNow: são as provas de posse no Google e no Bing.
