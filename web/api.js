@@ -42,6 +42,7 @@ export const api = {
   patchFieldDef: (pid, fid, b) => req('PATCH', `/pipelines/${pid}/field-defs/${fid}`, b),
   deleteFieldDef: (pid, fid) => req('DELETE', `/pipelines/${pid}/field-defs/${fid}`),
   reorderFieldDefs: (pid, order) => req('POST', `/pipelines/${pid}/field-defs/reorder`, { order }),
+  calendario: (params) => req('GET', '/calendario?' + new URLSearchParams(params).toString()),
   board: (pid, sort, estado) => req('GET', `/pipelines/${pid}/board?limit=300` + (sort ? `&sort=${sort}` : '') + (estado ? `&estado=${estado}` : '')),
 
   deal: (id) => req('GET', `/deals/${id}`),

@@ -6,6 +6,7 @@ import { api } from './api.js';
 import { Loading } from './ui.jsx';
 import Login from './Login.jsx';
 import Kanban from './Kanban.jsx';
+import Calendario from './Calendario.jsx';
 import Deal from './Deal.jsx';
 import Leads from './Leads.jsx';
 import LeadPage from './LeadPage.jsx';
@@ -149,6 +150,7 @@ function Shell({ user, setUser }) {
         >CRM <span>SK Decorações</span></div>
         <nav className={'nav' + (navOpen ? ' open' : '')} onClick={() => setNavOpen(false)}>
           <NavLink to="/kanban" className={({ isActive }) => isActive ? 'on' : ''}>Negociações</NavLink>
+          <NavLink to="/calendario" className={({ isActive }) => isActive ? 'on' : ''}>Calendário</NavLink>
           <NavLink to="/leads" className={({ isActive }) => isActive ? 'on' : ''}>Leads</NavLink>
           <NavLink to="/tarefas" className={({ isActive }) => isActive ? 'on' : ''}>Tarefas</NavLink>
           <NavLink to="/segmentos" className={({ isActive }) => isActive ? 'on' : ''}>Segmentos</NavLink>
@@ -174,6 +176,7 @@ function Shell({ user, setUser }) {
       {senhaOpen && <TrocarSenhaModal onClose={() => setSenhaOpen(false)} />}
       <Routes>
         <Route path="/kanban" element={<Kanban admin={admin} />} />
+        <Route path="/calendario" element={<Calendario />} />
         <Route path="/deals/:id" element={<Deal />} />
         <Route path="/leads" element={<Leads />} />
         <Route path="/leads/:id" element={<LeadPage />} />

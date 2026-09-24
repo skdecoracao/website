@@ -425,6 +425,63 @@ async function route(req, env, url) {
       return json(rows);
     }
 
+    // ---------- calendário de festas ----------
+    // Negociações posicionadas pela Data da festa (campo data_festa, data pura
+    // AAAA-MM-DD: compara como texto, sem converter fuso). Filtra no D1 pelo
+    // intervalo pedido. Classificação pelo estado e pelas marcas da etapa, nunca
+    // pelo nome: vendida na primeira etapa de ganho = 'fechada'; vendida em
+    // etapa de ganho posterior ou com a festa já passada = 'realizada'; aberta
+    // na última etapa comum antes do ganho = 'quase'; outras abertas = 'aberta'.
+    // Perdidas e etapas de perda nunca entram.
+    if (p === '/api/calendario' && m === 'GET') {
+      const DATA = /^\d{4}-\d{2}-\d{2}$/;
+      const inicio = url.searchParams.get('inicio') || '';
+      const fim = url.searchParams.get('fim') || '';
+      if (!DATA.test(inicio) || !DATA.test(fim) || inicio > fim) return err(400, 'inicio e fim obrigatorios (AAAA-MM-DD)');
+      const funilQ = url.searchParams.get('funil');
+      const pipe = funilQ
+        ? await db.prepare('SELECT * FROM pipelines WHERE id = ? AND workspace_id = ?').bind(Number(funilQ), ws).first()
+        : await db.prepare("SELECT * FROM pipelines WHERE workspace_id = ? ORDER BY (nome <> 'Vendas'), ordem, id LIMIT 1").bind(ws).first();
+      if (!pipe) return err(404, 'funil nao encontrado');
+      await guardPipe(pipe.id);
+      const etapas = (await db.prepare('SELECT id, nome, ordem, is_won, is_lost FROM stages WHERE pipeline_id = ? ORDER BY ordem, id').bind(pipe.id).all()).results
+        .filter((s) => !s.is_lost);
+      const ganhos = etapas.filter((s) => s.is_won);
+      const primeiroGanho = ganhos[0] || null;
+      const abertas = etapas.filter((s) => !s.is_won);
+      // "Quase fechando" = a última etapa comum que vem antes da primeira de ganho.
+      const quase = abertas.filter((s) => !primeiroGanho || s.ordem < primeiroGanho.ordem).slice(-1)[0] || null;
+      const tipoDaEtapa = (s) => (s.is_won ? (primeiroGanho && s.id === primeiroGanho.id ? 'fechada' : 'realizada') : (quase && s.id === quase.id ? 'quase' : 'aberta'));
+      for (const s of etapas) { s.tipo = tipoDaEtapa(s); s.padrao = s.tipo !== 'aberta' ? 1 : 0; }
+      // Etapas pedidas (?etapas=1,2,3); sem o parâmetro, as padrão.
+      const pedidas = (url.searchParams.get('etapas') ?? etapas.filter((s) => s.padrao).map((s) => s.id).join(','))
+        .split(',').map(Number).filter((id) => etapas.some((s) => s.id === id));
+      const hoje = new Date(Date.now() - 3 * 3600000).toISOString().slice(0, 10); // dia de São Paulo
+      const vazio = { funil: { id: pipe.id, nome: pipe.nome }, etapas, etapas_ativas: pedidas, hoje, festas: [], sem_data: [] };
+      if (!pedidas.length) return json(vazio);
+      const campo = (c) => `(SELECT v.valor FROM deal_field_values v JOIN deal_field_defs def ON def.id = v.field_def_id WHERE v.deal_id = d.id AND def.chave = '${c}') ${c}`;
+      const base = `SELECT d.id, d.titulo, d.valor, d.estado, d.stage_id, l.nome lead_nome,
+            ${['data_festa', 'tema', 'pacote', 'entrega', 'local'].map(campo).join(', ')}
+          FROM deals d LEFT JOIN leads l ON l.id = d.lead_id
+         WHERE d.pipeline_id = ? AND d.estado <> 'perdida' AND d.stage_id IN (${pedidas.map(() => '?').join(',')})`;
+      const [comData, semData] = await db.batch([
+        db.prepare(`SELECT * FROM (${base}) WHERE data_festa BETWEEN ? AND ? ORDER BY data_festa, id`).bind(pipe.id, ...pedidas, inicio, fim),
+        // Sem data: só quem ainda vai ter festa (quase fechando e fechadas), para ela preencher.
+        db.prepare(`SELECT * FROM (${base}) WHERE COALESCE(data_festa, '') = '' ORDER BY id DESC LIMIT 200`).bind(pipe.id, ...pedidas),
+      ]);
+      const classifica = (d) => {
+        const st = etapas.find((s) => s.id === d.stage_id);
+        let tipo = d.estado === 'vendida' ? (st && st.tipo === 'realizada' ? 'realizada' : 'fechada') : (st && st.tipo === 'quase' ? 'quase' : 'aberta');
+        if (tipo === 'fechada' && d.data_festa && d.data_festa < hoje) tipo = 'realizada';
+        return { ...d, tipo, etapa: st ? st.nome : null };
+      };
+      return json({
+        ...vazio,
+        festas: comData.results.map(classifica),
+        sem_data: semData.results.map(classifica).filter((d) => d.tipo === 'quase' || d.tipo === 'fechada'),
+      });
+    }
+
     // ---------- leads ----------
     if (p === '/api/leads' && m === 'GET') {
       const q = url.searchParams.get('q');

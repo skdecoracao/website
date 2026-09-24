@@ -648,3 +648,58 @@ table.rel-tab tr:last-child td { border-bottom: none; }
   font-family: inherit; font-size: 13px; font-weight: 600; padding: 6px 11px; max-width: 230px;
 }
 table.rel-tab tr.rel-agregada td { background: var(--chip); font-weight: 800; }
+
+/* ---- Calendário de festas ---- */
+.cal-topo { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin-bottom: 10px; }
+.cal-topo h2 { margin: 0; }
+.cal-nav { display: flex; align-items: center; gap: 6px; }
+.cal-mes { font-size: 16px; min-width: 170px; text-align: center; }
+.cal-ctrl { display: flex; align-items: center; gap: 8px; margin-left: auto; }
+.cal-filtros, .cal-legenda { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin: 8px 0; font-size: 13px; }
+.cal-lbl { font-weight: 700; color: var(--mut); }
+.cal-etapa { cursor: pointer; }
+.cal-etapa.on { background: var(--rosa-claro); border-color: var(--rosa); }
+.cal-legenda span { display: inline-flex; align-items: center; gap: 6px; }
+.cal-cor { width: 16px; height: 16px; border-radius: 4px; display: inline-block; border: 1px solid var(--borda); }
+.cal-resumo { display: flex; gap: 10px; flex-wrap: wrap; margin: 10px 0 14px; }
+.cal-resumo div { background: var(--superficie); border: 1px solid var(--borda); border-radius: 10px; padding: 8px 14px; font-size: 13.5px; }
+.cal-resumo b { font-size: 17px; }
+
+.cal-fechada { background: var(--cal-fechada-bg); color: var(--cal-fechada-tx); border-color: var(--cal-fechada-bg); }
+.cal-realizada { background: var(--cal-realizada-bg); color: var(--cal-realizada-tx); border-color: var(--cal-realizada-tx); }
+.cal-quase { background: var(--cal-quase-bg); color: var(--cal-quase-tx); border-color: var(--dourado-hover); }
+.cal-aberta { background: var(--cal-aberta-bg); color: var(--cal-aberta-tx); border: 1px dashed var(--borda); }
+
+.cal-grade { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); border: 1.5px solid var(--borda); border-radius: 10px; overflow: hidden; background: var(--borda); gap: 1px; }
+.cal-sem { background: var(--creme-coluna); font-weight: 700; font-size: 12.5px; padding: 6px 8px; }
+.cal-dia { background: var(--superficie); min-height: 112px; padding: 5px; display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.cal-dia.fora { background: var(--creme); }
+.cal-dia.fora .cal-num { color: var(--mut); }
+.cal-dia.hoje { box-shadow: inset 0 0 0 2px var(--cal-hoje); }
+.cal-num { font-weight: 700; font-size: 13px; display: flex; align-items: center; gap: 6px; }
+.cal-hoje-lbl { font-size: 11px; font-weight: 700; background: var(--cal-hoje); color: var(--texto-botao); border-radius: 999px; padding: 0 7px; }
+.cal-festa { display: flex; flex-direction: column; align-items: flex-start; text-align: left; width: 100%; border: 1px solid; border-radius: 6px; padding: 3px 6px; font-size: 12px; line-height: 1.3; font-family: inherit; min-width: 0; }
+.cal-festa:hover { filter: brightness(.96); }
+.cal-festa span { max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.cal-rot { font-size: 10.5px; font-weight: 800; letter-spacing: .2px; }
+.cal-tema { font-weight: 700; }
+.cal-mais { background: none; border: 0; padding: 2px 4px; color: var(--link); font-weight: 700; font-size: 12px; text-align: left; font-family: inherit; }
+
+.cal-lista-dia h3 { font-size: 19px; margin: 18px 0 8px; }
+.cal-lista-dia h3::first-letter { text-transform: capitalize; }
+.cal-item { display: flex; align-items: center; gap: 12px; width: 100%; text-align: left; border: 1px solid; border-radius: 10px; padding: 10px 12px; margin-bottom: 8px; font-family: inherit; font-size: 13.5px; }
+.cal-item .cal-rot { flex-shrink: 0; min-width: 62px; }
+.cal-item-corpo { display: flex; flex-direction: column; gap: 2px; min-width: 0; flex: 1; }
+.cal-item-l2 { font-size: 12.5px; }
+.cal-item-valor { font-weight: 800; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.cal-semdata { margin-top: 18px; }
+.cal-semdata ul { margin: 8px 0 0; padding-left: 18px; }
+.cal-semdata li { margin: 5px 0; }
+.cal-semdata .cal-rot { border-radius: 4px; padding: 1px 6px; border: 1px solid; }
+
+@media (max-width: 720px) {
+  .cal-ctrl { margin-left: 0; }
+  .cal-mes { min-width: 0; }
+  .cal-dia { min-height: 70px; }
+  .cal-festa .cal-cli, .cal-festa .cal-tema { display: none; }
+}

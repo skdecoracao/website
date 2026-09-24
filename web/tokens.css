@@ -35,6 +35,13 @@
   --ok: #2F6B45;             /* melhorou, ganho */
   --ok-bg: #E3EFE6;
 
+  /* calendário de festas: significado fixo (texto e fundo passam AA) */
+  --cal-fechada-bg: #2F6B45;   --cal-fechada-tx: #FFFBF6;   /* verde: sinal pago (6,2:1) */
+  --cal-realizada-bg: #DCEADF; --cal-realizada-tx: #24452F; /* verde apagado: festa já feita (8:1) */
+  --cal-quase-bg: #F2D98A;     --cal-quase-tx: #3F3129;     /* amarelo: negociando (8,9:1) */
+  --cal-aberta-bg: #FFFBF6;    --cal-aberta-tx: #3F3129;    /* etapas anteriores, contorno tracejado */
+  --cal-hoje: #C97D86;         /* contorno do dia de hoje */
+
   /* temperatura da negociação, de fria a muito quente */
   --t1: #5B7896; --t2: #7E97AE; --t3: #C9A24A; --t4: #A85560; --t5: #8E2F3B;
 
