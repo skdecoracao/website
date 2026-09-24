@@ -1,0 +1,650 @@
+/* CRM SK Decorações: estilos. Todas as cores vêm de tokens.css (nenhum hex aqui). */
+@import './tokens.css';
+
+/* ---- barras de rolagem (via tokens) ---- */
+* { scrollbar-width: thin; scrollbar-color: var(--sb-thumb) var(--sb-track); }
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: var(--sb-track); }
+::-webkit-scrollbar-thumb { background: var(--sb-thumb); border-radius: 6px; border: 2px solid var(--sb-track); }
+::-webkit-scrollbar-thumb:hover { background: var(--muted); }
+::-webkit-scrollbar-corner { background: var(--sb-track); }
+
+* { box-sizing: border-box; }
+html, body, #root { height: 100%; margin: 0; }
+body {
+  font-family: var(--corpo);
+  color: var(--texto);
+  background: var(--fundo);
+  font-size: 14px;
+}
+a { color: var(--petroleo); text-decoration: none; }
+a:hover { text-decoration: underline; }
+button { font-family: inherit; font-size: 14px; cursor: pointer; }
+
+/* títulos em Cormorant Garamond (display da marca), caixa normal */
+h1, h2, h3, .brand { font-family: var(--display); font-weight: 700; letter-spacing: 0; }
+h2 { font-size: 28px; }
+h3 { font-size: 20px; }
+
+/* ---- botoes ---- */
+.btn {
+  border: 1px solid var(--borda);
+  background: var(--superficie);
+  color: var(--texto);
+  padding: 7px 14px;
+  border-radius: 6px;
+  font-weight: 600;
+}
+.btn:hover { background: var(--fumo); }
+.btn.ciano { background: var(--ciano); border-color: var(--ciano); color: var(--ciano-texto); }
+.btn.ciano:hover { background: var(--ciano-hover); }
+.btn.primary { background: var(--cta); border-color: var(--cta); color: var(--cta-texto); }
+.btn.primary:hover { background: var(--cta-hover); }
+.btn.danger { color: var(--vermelho); border-color: color-mix(in srgb, var(--vermelho) 35%, var(--borda)); }
+.btn.danger:hover { background: color-mix(in srgb, var(--vermelho) 10%, var(--superficie)); }
+.btn.sm { padding: 4px 10px; font-size: 13px; }
+.btn:disabled { opacity: .55; cursor: default; }
+
+/* ---- topbar: banda marrom (cor do texto da marca) com a marca em dourado ---- */
+.topbar {
+  background: var(--texto);
+  display: flex; align-items: center; gap: 26px;
+  padding: 0 20px; height: 52px;
+  position: sticky; top: 0; z-index: 20;
+}
+.brand {
+  font-family: var(--display);
+  font-style: normal; font-weight: 700; letter-spacing: 0;
+  font-size: 23px; color: var(--texto-claro); white-space: nowrap;
+}
+.brand span { color: var(--dourado); }
+.nav {
+  display: flex; gap: 2px; font-size: 13px; font-weight: 600;
+  overflow-x: auto; scrollbar-width: none; min-width: 0; flex: 1;
+}
+.nav::-webkit-scrollbar { display: none; }
+/* hambúrguer: só aparece no mobile (media query abre) */
+.hamburger {
+  display: none; border: 1px solid rgba(255, 255, 255, .22); background: rgba(255, 255, 255, .10); color: var(--texto-claro);
+  border-radius: 8px; width: 34px; height: 34px; font-size: 18px; line-height: 1;
+  align-items: center; justify-content: center; padding: 0;
+}
+.hamburger:hover { background: rgba(255, 255, 255, .2); }
+.nav a {
+  padding: 7px 13px; border-radius: 8px; color: var(--borda); font-weight: 600; white-space: nowrap;
+}
+.nav a:hover { color: var(--texto-claro); text-decoration: none; }
+.nav a.on { color: var(--texto-claro); background: rgba(255, 255, 255, .14); }
+.topbar .spacer { flex: 0 0 0; margin-left: auto; }
+.tema-toggle {
+  border: 1px solid rgba(255, 255, 255, .22); background: rgba(255, 255, 255, .10); color: var(--texto-claro);
+  border-radius: 999px; padding: 5px 12px; font-size: 12px; font-weight: 600; line-height: 1.4;
+  display: inline-flex; align-items: center; white-space: nowrap; flex-shrink: 0; font-family: inherit;
+}
+.tema-toggle:hover { background: rgba(255, 255, 255, .2); }
+.userbox { display: flex; align-items: center; gap: 10px; color: var(--borda); font-size: 13px; white-space: nowrap; }
+.user-menu {
+  position: absolute; top: 28px; right: 0; background: var(--superficie);
+  border: 1px solid var(--borda); border-radius: 8px; box-shadow: var(--sombra);
+  display: flex; flex-direction: column; min-width: 150px; z-index: 30; overflow: hidden;
+}
+.user-menu button {
+  border: none; background: none; text-align: left; padding: 9px 14px; font-size: 13px; color: var(--texto);
+}
+.user-menu button:hover { background: var(--coluna); }
+
+/* ---- faixa "ver como" (admin vendo o CRM como outro usuário) ---- */
+.ver-como-bar {
+  background: var(--rosa-claro); color: var(--texto); font-size: 13px; font-weight: 600;
+  padding: 8px 20px; display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+}
+.ver-como-bar .btn { background: var(--texto); color: var(--texto-claro); border-color: var(--texto); }
+
+/* ---- modal ---- */
+.modal-overlay {
+  position: fixed; inset: 0; background: rgba(0, 0, 0, .5);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 60; /* acima de qualquer painel: "+ Criar tarefa" abre por cima */
+}
+.modal-card {
+  background: var(--superficie); border-radius: 12px; padding: 24px; width: 100%; max-width: 380px;
+  box-shadow: var(--sombra); border: 1px solid var(--borda);
+}
+.modal-card.wide { max-width: 640px; }
+.modal-card h3 { margin: 0 0 16px; color: var(--petroleo); }
+.disparo-item-click { cursor: pointer; }
+.disparo-item-click:hover { background: var(--faint); }
+.modal-actions { display: flex; justify-content: flex-end; gap: 8px; margin-top: 16px; }
+
+/* botão "Filtros": só no mobile (media query abre); colapsa os controles do board */
+.filtros-btn { display: none; align-items: center; gap: 7px; margin: 10px 12px 0;
+  border: 1px solid var(--borda); background: var(--superficie); color: var(--texto);
+  border-radius: 8px; padding: 9px 14px; font-weight: 600; }
+.filtros-btn:hover { background: var(--coluna); }
+.filtros-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--cta); display: inline-block; }
+
+/* ---- filtros ---- */
+.filtros {
+  background: var(--sup); border-bottom: 1px solid var(--ln);
+  display: flex; align-items: center; gap: 10px; padding: 11px 20px; flex-wrap: wrap;
+  color: var(--tx);
+}
+.filtros .sel {
+  font-family: inherit; font-size: 13px; padding: 7px 10px;
+  border: 1px solid var(--ln); border-radius: 8px;
+  background: var(--sup); color: var(--tx); cursor: pointer;
+}
+.filtros .sel.funil { font-weight: 600; }
+.filtros .sel option { color: initial; }
+/* ordenação rápida em 1 clique (pills) */
+.sort-wrap { display: flex; align-items: center; gap: 6px; margin-left: 6px; flex-wrap: wrap; }
+.sort-lbl { font-size: 12px; font-weight: 700; color: var(--mut); letter-spacing: .4px; }
+.sort-pills { display: flex; gap: 5px; flex-wrap: wrap; }
+/* botão flutuante "+" (nova negociação), canto inferior direito, no dourado da marca */
+.fab-nova {
+  position: fixed; right: 22px; bottom: 22px; z-index: 40;
+  width: 58px; height: 58px; border-radius: 50%; border: 0;
+  background: var(--cta); color: var(--cta-texto); font: 700 32px/1 inherit; font-family: inherit;
+  display: flex; align-items: center; justify-content: center; cursor: pointer;
+  box-shadow: 0 8px 22px rgba(63, 49, 41, .30);
+  transition: transform .12s, background .12s;
+}
+.fab-nova:hover { background: var(--cta-hover); transform: scale(1.06); }
+.fab-nova:disabled { opacity: .5; cursor: default; transform: none; }
+@media (max-width: 780px) { .fab-nova { right: 16px; bottom: 16px; width: 54px; height: 54px; } }
+.sort-pills button {
+  padding: 6px 13px; border-radius: 999px; border: 1px solid var(--ln);
+  background: var(--sup); color: var(--tx); font-weight: 600; font-size: 12.5px;
+  font-family: inherit; white-space: nowrap;
+}
+.sort-pills button.on { background: var(--texto); border-color: var(--texto); color: var(--texto-claro); }
+.busca-inp {
+  margin-left: auto; font-family: inherit; font-size: 13px; padding: 7px 12px;
+  border: 1px solid var(--ln); border-radius: 8px; background: var(--chip);
+  color: var(--tx); width: 230px; outline: none;
+}
+.busca-inp::placeholder { color: var(--mut); }
+/* busca antiga (Tarefas/Leads ainda usam .chip.busca) */
+.busca { flex: 1; min-width: 160px; max-width: 320px; }
+.busca input { width: 100%; }
+/* chips dos filtros extras (Mais filtros) */
+.chip {
+  display: inline-flex; align-items: center; gap: 6px;
+  border: 1px solid var(--ln); background: var(--sup);
+  padding: 6px 11px; border-radius: 16px; color: var(--tx); font-size: 13px;
+}
+.chip select, .chip input {
+  border: none; background: transparent; font-size: 13px; color: var(--tx);
+  outline: none; font-family: inherit;
+}
+.chip select option { color: initial; }
+.chip.label { color: var(--mut); }
+
+/* ---- kanban (redesign 14/08/2026, protótipo hifi) ---- */
+.board {
+  display: flex; gap: 14px; padding: 16px 20px 20px; overflow-x: auto;
+  align-items: flex-start; background: var(--pg); color: var(--tx);
+  height: calc(100vh - 52px - 58px);
+}
+.col {
+  background: var(--colbg); border: 1px solid var(--ln); border-radius: 12px;
+  min-width: 290px; width: 290px; flex-shrink: 0;
+  display: flex; flex-direction: column; max-height: 100%;
+}
+.col.dragover { outline: 2px dashed var(--evfg); outline-offset: -2px; }
+.col-head { padding: 12px 14px 9px; display: flex; flex-direction: column; gap: 2px; }
+.col-head .nome { font-weight: 800; font-size: 13px; letter-spacing: .3px; }
+.col-head .meta { color: var(--mut); font-size: 12px; font-weight: 600; }
+.col-body { padding: 2px 10px 10px; overflow-y: auto; display: flex; flex-direction: column; gap: 8px; }
+.col-vazia {
+  font-size: 12.5px; color: var(--mut); text-align: center; padding: 18px 8px;
+  border: 1px dashed var(--ln); border-radius: 10px;
+}
+
+/* card: nome, data da festa, tema+pacote e origem, temperatura+parado, telefone */
+.card {
+  background: var(--sup); border: 1px solid var(--ln); border-radius: 10px;
+  padding: 11px 12px; cursor: pointer; flex-shrink: 0;
+  display: flex; flex-direction: column; gap: 7px;
+}
+/* card que mostra a hora de chegada aperta os vãos pra não crescer (Gui, 24/08) */
+.card:has(.chegou-lbl) { gap: 5px; padding-top: 9px; padding-bottom: 9px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, .05); color: var(--tx);
+}
+.card:hover { box-shadow: 0 4px 14px rgba(0, 0, 0, .10); }
+.card .c-row { display: flex; align-items: center; gap: 7px; min-width: 0; }
+.card .c-title { justify-content: space-between; gap: 8px; }
+.card .titulo { font-weight: 700; font-size: 13.5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; flex: 1; }
+.card .c-tema { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0; }
+/* valor na cor padrão do texto (pedido do Gui, 14/08: não fica em vermelho) */
+.card .valor { font-weight: 800; font-size: 13px; white-space: nowrap; flex-shrink: 0; }
+.ev-chip {
+  background: var(--evbg); color: var(--evfg); font-weight: 700; font-size: 12px;
+  padding: 3px 8px; border-radius: 6px; white-space: nowrap;
+  min-width: 0; overflow: hidden; text-overflow: ellipsis; /* nome longo encurta em vez de vazar do card */
+}
+.ev-em { font-size: 12px; font-weight: 700; color: var(--mut); white-space: nowrap; flex-shrink: 0; }
+.ev-em.urgente { color: var(--hot); }
+.ev-sem { font-size: 12px; color: var(--mut); }
+.card .c-meta { justify-content: space-between; gap: 8px; font-size: 12px; color: var(--mut); }
+.card .origem-lbl { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 55%; }
+.card .motivo-perda { font-size: 12px; color: var(--hot); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.temp-dots { display: flex; gap: 3px; align-items: center; min-width: 0; }
+.temp-dots i { width: 7px; height: 7px; border-radius: 50%; display: inline-block; flex-shrink: 0; }
+.temp-lbl { font-size: 11px; font-weight: 700; color: var(--mut); margin-left: 4px; white-space: nowrap; }
+.par-chip {
+  margin-left: auto; font-size: 11px; font-weight: 700; color: var(--mut);
+  background: var(--chip); padding: 2px 8px; border-radius: 999px; white-space: nowrap; flex-shrink: 0;
+}
+.par-chip.alerta { color: var(--hot); background: var(--hotbg); }
+/* próxima tarefa aberta (pedido do Gui, 14/08): linha discreta acima do telefone */
+.card .tarefa-chip { font-size: 11px; font-weight: 600; color: var(--mut); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.card .tarefa-chip.atrasada { color: var(--hot); }
+.card .c-tel { border-top: 1px solid var(--ln); padding-top: 7px; margin-top: 1px; font-size: 12.5px; }
+.card .c-tel a { color: var(--link); font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.card .c-tel a:hover { color: var(--hot); text-decoration: none; }
+.card .ph { color: var(--mut); font-size: 12px; }
+.tel-copy { border: 1px solid var(--ln); background: var(--sup); color: var(--tx); border-radius: 4px; padding: 0 6px; font-size: 12px; line-height: 1.5; }
+.tel-copy:hover { background: var(--chip); }
+
+/* ---- barra de calor (termometro frio->quente) ---- */
+.heat { display: inline-flex; align-items: center; gap: 7px; }
+.heat-track {
+  position: relative;
+  width: 68px; height: 6px; border-radius: 4px; overflow: hidden;
+  background: color-mix(in srgb, var(--muted) 30%, transparent); flex-shrink: 0;
+}
+.heat-fill {
+  display: block; height: 100%; border-radius: 4px;
+  /* gradiente da temperatura (fria -> dourado -> muito quente), tokens t1, t3 e t5 */
+  background: linear-gradient(90deg, var(--t1) 0%, var(--t3) 55%, var(--t5) 100%);
+  background-size: 68px 100%;
+}
+.heat-label { font-size: 11.5px; color: var(--muted); font-weight: 600; white-space: nowrap; }
+
+/* nível 5 (Muito quente): sem animação (pedido do Gui, 04/08/2026). A barra
+   cheia e o rótulo em vermelho já dizem tudo; o brilho pulsante e o LED
+   circulando distraíam num board com dezenas de cards. */
+.heat-fire .heat-label { color: var(--vermelho); font-weight: 700; }
+
+/* ---- filtros extras kanban ---- */
+.filtros-extra { border-top: none; padding-top: 0; }
+.temp-chips { display: inline-flex; gap: 4px; flex-wrap: wrap; }
+.chip.temp { cursor: pointer; font-size: 12px; padding: 4px 9px; }
+.chip.temp.on { background: var(--ciano); border-color: var(--ciano); color: var(--ciano-texto); }
+
+/* ---- aba Tarefas ---- */
+.resumo-tarefas { margin: -6px 0 14px; }
+.txt-atrasada { color: var(--vermelho); }
+table.tab-tarefas td:first-child { width: 34px; }
+table.tab-tarefas .t-titulo { font-weight: 600; }
+table.tab-tarefas .t-desc { font-size: 12.5px; margin-top: 2px; }
+table.tab-tarefas tr.feita .t-titulo { text-decoration: line-through; color: var(--muted); font-weight: 500; }
+/* atrasada ganha um filete vermelho na borda, sem pintar a linha inteira */
+table.tab-tarefas tr.atrasada td:first-child { box-shadow: inset 3px 0 0 var(--vermelho); }
+table.tab-tarefas .nowrap { white-space: nowrap; }
+/* telefone do lead com clique para copiar (fica embaixo do nome) */
+.copia-tel {
+  display: flex; align-items: center; gap: 6px; margin-top: 3px;
+  padding: 2px 7px; border: 1px solid var(--borda); border-radius: 6px;
+  background: transparent; color: var(--texto); cursor: pointer;
+  font: inherit; font-size: 12.5px; white-space: nowrap;
+}
+.copia-tel:hover { border-color: var(--azul-vivo); }
+.copia-tel.is-ok { color: var(--verde); border-color: var(--verde); }
+.copia-tel.is-erro { color: var(--vermelho); border-color: var(--vermelho); }
+.copia-tel__ico { font-size: 12px; opacity: .85; }
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+
+/* so no desktop (não poluir o mobile) */
+@media (max-width: 768px) { .so-desktop { display: none !important; } }
+
+/* ---- login ---- */
+.login-wrap { display: flex; align-items: center; justify-content: center; height: 100%; padding: 20px; }
+.login-card {
+  background: var(--superficie); padding: 32px 30px; border-radius: 12px;
+  box-shadow: var(--sombra); width: 100%; max-width: 360px; border: 1px solid var(--borda);
+}
+.login-card h1 { margin: 0 0 4px; color: var(--petroleo); font-size: 32px; }
+.login-marca {
+  width: 56px; height: 56px; border-radius: 50%; margin: 0 0 14px;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--texto); color: var(--texto-claro); border: 2px solid var(--dourado);
+  font-family: var(--display); font-weight: 700; font-size: 24px;
+}
+.login-card p { margin: 0 0 22px; color: var(--muted); }
+.field { margin-bottom: 14px; }
+.field label { display: block; font-size: 13px; color: var(--muted); margin-bottom: 5px; }
+.field input {
+  width: 100%; padding: 10px 12px; border: 1px solid var(--borda);
+  border-radius: 6px; font-size: 14px; font-family: inherit; background: var(--superficie); color: var(--texto);
+}
+.field input:focus { outline: none; border-color: var(--ciano); }
+.erro-inline { color: var(--vermelho); font-size: 13px; margin: 4px 0; }
+.erro { color: var(--vermelho); font-size: 13px; margin: 8px 0; }
+
+/* ---- tela negociacao ---- */
+.deal-page { padding: 0 0 40px; }
+.stagebar {
+  display: flex; overflow-x: auto; background: var(--superficie);
+  border-bottom: 1px solid var(--borda); padding: 12px 18px; gap: 3px;
+}
+.stagebar .step {
+  position: relative; padding: 8px 20px 8px 24px; background: var(--coluna);
+  color: var(--muted); font-size: 12.5px; font-weight: 600; white-space: nowrap;
+  border: none; cursor: pointer; clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 50%, calc(100% - 12px) 100%, 0 100%, 12px 50%);
+}
+.stagebar .step:first-child { padding-left: 16px; clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 50%, calc(100% - 12px) 100%, 0 100%); }
+.stagebar .step.on { background: var(--ciano); color: var(--ciano-texto); }
+.stagebar .step.done { background: color-mix(in srgb, var(--azul-vivo) 30%, var(--coluna)); color: var(--petroleo); }
+
+.deal-grid { display: grid; grid-template-columns: 340px 1fr; gap: 18px; padding: 18px; }
+.panel { background: var(--superficie); border-radius: var(--radius); box-shadow: var(--sombra); padding: 16px; border: 1px solid var(--borda); }
+.panel h3 { margin: 0 0 12px; font-size: 14px; color: var(--petroleo); }
+.panel h3.mt { margin-top: 22px; }
+
+/* Bloco de proveniência (Origem) na negociação e no lead */
+.origem-block .tipo-chip {
+  display: inline-block; font-size: 11px; font-weight: 700; padding: 2px 9px;
+  border-radius: 10px; margin-bottom: 6px;
+}
+.tipo-chip.tipo-festa { background: color-mix(in srgb, var(--amarelo) 30%, transparent); color: color-mix(in srgb, var(--amarelo) 45%, var(--texto)); }
+.tipo-chip.tipo-corrida { background: color-mix(in srgb, var(--azul-vivo) 22%, transparent); color: var(--azul-vivo); }
+
+/* Motivo de perda no card do kanban (linha 3, quando perdida) */
+.card .motivo-perda {
+  font-size: 12px; color: var(--vermelho);
+  display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.kv { margin-bottom: 12px; }
+.kv label { display: block; font-size: 12px; color: var(--muted); margin-bottom: 4px; }
+.kv .val { font-size: 14px; }
+.kv input, .kv select, .kv textarea {
+  width: 100%; padding: 7px 9px; border: 1px solid var(--borda); border-radius: 6px;
+  font-size: 13px; font-family: inherit; background: var(--superficie); color: var(--texto);
+}
+.quick-btns { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 6px; }
+.quick-btns button {
+  border: 1px solid var(--borda); background: var(--superficie); color: var(--texto); border-radius: 6px;
+  padding: 5px 11px; font-size: 13px;
+}
+.quick-btns button.on { background: var(--ciano); border-color: var(--ciano); color: var(--ciano-texto); }
+
+.contato-line { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; font-size: 13px; }
+.tabs { display: flex; gap: 2px; border-bottom: 1px solid var(--borda); margin-bottom: 14px; }
+.tabs button {
+  border: none; background: none; padding: 9px 15px; color: var(--muted);
+  font-weight: 600; border-bottom: 2px solid transparent; margin-bottom: -1px;
+}
+.tabs button.on { color: var(--petroleo); border-bottom-color: var(--ciano); }
+.deal-actions { display: flex; gap: 8px; padding: 12px 18px 4px; flex-wrap: wrap; align-items: center; }
+
+/* timeline */
+.timeline { list-style: none; padding: 0; margin: 0; }
+.timeline li { padding: 10px 0 10px 16px; border-left: 2px solid var(--borda); position: relative; }
+.timeline li::before {
+  content: ''; position: absolute; left: -5px; top: 14px; width: 8px; height: 8px;
+  border-radius: 50%; background: var(--ciano);
+}
+.timeline .quando { color: var(--muted); font-size: 12px; display: flex; gap: 8px; align-items: baseline; flex-wrap: wrap; }
+.timeline .quando > span:first-child { font-weight: 600; color: var(--texto-2); }
+.timeline .quando-data { font-size: 11px; }
+.timeline .corpo { margin-top: 2px; }
+
+.task-row { display: flex; align-items: center; gap: 10px; padding: 8px 0; border-bottom: 1px solid var(--borda); }
+.task-row.feito .task-titulo { text-decoration: line-through; color: var(--muted); }
+.task-titulo { flex: 1; }
+
+/* ---- tabelas (leads / config) ---- */
+.page { padding: 18px; }
+.page h2 { margin: 0 0 16px; color: var(--petroleo); }
+table.tab { width: 100%; border-collapse: collapse; background: var(--superficie); border-radius: var(--radius); overflow: hidden; box-shadow: var(--sombra); }
+table.tab th, table.tab td { text-align: left; padding: 11px 14px; border-bottom: 1px solid var(--borda); font-size: 13.5px; }
+table.tab th { background: var(--coluna); color: var(--muted); font-weight: 700; font-size: 12.5px; }
+table.tab tr:last-child td { border-bottom: none; }
+table.tab tbody tr:hover { background: var(--coluna); cursor: pointer; }
+.tag {
+  display: inline-flex; align-items: center; gap: 5px; background: color-mix(in srgb, var(--azul-vivo) 12%, transparent); color: var(--azul-texto);
+  padding: 3px 9px; border-radius: 12px; font-size: 12px; margin: 2px;
+}
+.tag button { border: none; background: none; color: var(--muted); cursor: pointer; padding: 0; line-height: 1; }
+.pager { display: flex; gap: 10px; align-items: center; margin-top: 14px; }
+.muted { color: var(--muted); }
+.cards-cfg { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
+
+/* ---- Base de leads (10/09/2026): filtros em lista suspensa + tabela ---- */
+.lista-filtros {
+  display: grid; grid-template-columns: minmax(200px, 1.4fr) repeat(4, minmax(150px, 1fr)) auto;
+  gap: 12px; align-items: end; margin-bottom: 14px;
+  background: var(--superficie); border: 1px solid var(--borda); border-radius: var(--radius); padding: 12px 14px; box-shadow: var(--sombra);
+}
+.lf { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.lf span { font-size: 11.5px; font-weight: 700; color: var(--muted); letter-spacing: .4px; }
+.lf input, .lf select {
+  font-family: inherit; font-size: 13px; padding: 8px 10px; border: 1px solid var(--borda); border-radius: 8px;
+  background: var(--superficie); color: var(--texto); min-width: 0; width: 100%;
+}
+.lf-limpar { align-self: end; white-space: nowrap; }
+.lista-resumo { font-size: 12.5px; margin: 0 0 8px 2px; }
+.tab-scroll { overflow-x: auto; }
+.tab-leads th.ord { cursor: pointer; user-select: none; }
+.tab-leads th.ord::after { content: ' ↕'; opacity: .45; }
+.tab-leads th.ord.on { color: var(--petroleo); }
+.tab-leads th.ord.on::after { content: ' ↓'; opacity: 1; }
+.tab-leads .td-nome { font-weight: 700; }
+.tab-leads .td-tel, .tab-leads .td-data { white-space: nowrap; }
+.tab-leads .td-tags { max-width: 260px; }
+.tab-leads .td-tags .tag { font-size: 11px; padding: 2px 7px; }
+@media (max-width: 900px) { .lista-filtros { grid-template-columns: 1fr 1fr; } .lf-limpar { grid-column: 1 / -1; justify-self: start; } }
+
+/* ---- Configurações em sub-abas (08/09/2026): nav lateral + conteúdo ---- */
+.cfg-layout { display: grid; grid-template-columns: 200px minmax(0, 1fr); gap: 18px; align-items: start; }
+.cfg-nav {
+  display: flex; flex-direction: column; gap: 4px; position: sticky; top: 66px;
+  background: var(--superficie); border: 1px solid var(--borda); border-radius: var(--radius); padding: 8px; box-shadow: var(--sombra);
+}
+.cfg-nav button {
+  text-align: left; border: 1px solid transparent; background: none; color: var(--texto);
+  padding: 9px 12px; border-radius: 8px; font-weight: 600; font-size: 13.5px; font-family: inherit;
+}
+.cfg-nav button:hover { background: var(--coluna); }
+.cfg-nav button.on { background: var(--ciano); border-color: var(--ciano); color: var(--texto-claro); }
+.cfg-conteudo { min-width: 0; }
+.cfg-cabeca { margin: 0 0 12px; }
+.cfg-cabeca h3 { margin: 0 0 4px; font-size: 18px; color: var(--petroleo); }
+.cfg-cabeca p { margin: 0; font-size: 13px; max-width: 760px; }
+.cfg-funil-topo { display: flex; gap: 10px; align-items: flex-end; flex-wrap: wrap; }
+.cfg-funil-topo .kv select { min-width: 260px; }
+@media (max-width: 780px) {
+  .cfg-layout { grid-template-columns: 1fr; }
+  .cfg-nav { position: static; flex-direction: row; overflow-x: auto; scrollbar-width: none; }
+  .cfg-nav button { white-space: nowrap; }
+}
+
+.loading { padding: 40px; text-align: center; color: var(--muted); }
+
+/* seletor de etapa no mobile (escondido no desktop) */
+.mob-stage { display: none; }
+
+/* ---- responsivo ---- */
+@media (max-width: 768px) {
+  .topbar { gap: 10px; padding: 0 12px; }
+  .nav a { padding: 7px 9px; }
+  .board { flex-direction: column; height: auto; overflow-x: visible; padding: 12px; }
+  .col { width: 100%; min-width: 0; max-height: none; }
+  .col.hide-mob { display: none; }
+  .mob-stage { display: block; padding: 10px 12px; background: var(--superficie); border-bottom: 1px solid var(--borda); }
+  .mob-stage select { width: 100%; padding: 9px; border: 1px solid var(--borda); border-radius: 6px; font-size: 14px; background: var(--superficie); color: var(--texto); }
+  .deal-grid { grid-template-columns: 1fr; }
+  .filtros { padding: 8px 12px; }
+  .busca { max-width: none; }
+
+  /* controles do board colapsados atrás do botão Filtros; mob-stage fica fora, sempre visível */
+  .filtros-btn { display: inline-flex; }
+  .filtros:not(.aberto) { display: none; }
+
+  /* nav vira dropdown atrás do botão hambúrguer, sem estourar a topbar */
+  .hamburger { display: inline-flex; }
+  .nav {
+    display: none; position: absolute; top: 52px; left: 0; right: 0; z-index: 19;
+    flex-direction: column; gap: 2px; padding: 6px; overflow-x: visible;
+    background: var(--texto); border-bottom: 1px solid rgba(255, 255, 255, .15); box-shadow: var(--sombra);
+  }
+  .nav.open { display: flex; }
+  .nav a { padding: 12px; border-radius: 6px; }
+
+  /* userbox encolhe com reticências: era ele que estourava os 375px da topbar
+     (nowrap + min-width auto impedem o flex de comprimir o nome do usuário) */
+  .userbox { min-width: 0; }
+  .userbox > span { display: block; overflow: hidden; text-overflow: ellipsis; }
+
+  /* busca ocupa a linha inteira no painel de filtros do mobile */
+  .busca-inp { margin-left: 0; width: 100%; }
+  .card .so-desktop { display: none; }
+
+  /* tabelas rolam dentro de si mesmas no mobile, nunca a pagina inteira
+     (o outer <table> vira block+scroll; tbody/tr/td mantem display de tabela
+     por padrao do UA stylesheet, entao o grid interno continua intacto). */
+  table.tab { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+
+  /* alvo de toque >= 40px: etapas da negociacao, abas, botoes rapidos, chips */
+  .stagebar .step { min-height: 40px; padding-top: 11px; padding-bottom: 11px; }
+  .tabs button { min-height: 40px; }
+  .quick-btns button { min-height: 40px; padding-top: 9px; padding-bottom: 9px; }
+  .chip { min-height: 40px; }
+  .tel-copy { min-width: 40px; min-height: 40px; }
+  .task-row input[type="checkbox"], .kv input[type="checkbox"] { width: 20px; height: 20px; }
+
+}
+
+/* aba Tarefas: botão "Hoje" e período pelo prazo (de / até) */
+.chip.chip-btn { cursor: pointer; font-family: inherit; }
+.chip.chip-btn:hover { background: var(--coluna); }
+.chip.chip-btn.on { background: var(--cta); border-color: var(--cta); color: var(--cta-texto); }
+.chip.periodo input[type="date"] { color-scheme: light dark; }
+.chip.periodo .limpa { border: none; background: transparent; color: var(--mut); cursor: pointer; font-size: 12px; padding: 0 2px; }
+.chip.periodo .limpa:hover { color: var(--tx); }
+
+/* hora de chegada do lead: empilhada em cima do chip "hoje"/"Xd parado".
+   Os vãos do card com hora encolhem 2px (regra .card:has acima) pra altura
+   total não mudar. */
+.par-col { margin-left: auto; display: flex; flex-direction: column; align-items: flex-end; gap: 1px; flex-shrink: 0; }
+.par-col .par-chip { margin-left: 0; }
+.chegou-lbl { color: var(--mut); font-size: 10px; line-height: 1; white-space: nowrap; }
+
+/* ---- vista Lista + ações em lote (26/08/2026) ---- */
+.lista-wrap {
+  margin: 14px 20px 20px; overflow: auto; background: var(--sup);
+  border: 1px solid var(--ln); border-radius: 12px; color: var(--tx);
+  max-height: calc(100vh - 52px - 58px - 34px);
+}
+.lista { width: 100%; border-collapse: collapse; font-size: 13px; }
+.lista th {
+  position: sticky; top: 0; background: var(--sup); z-index: 1;
+  text-align: left; padding: 10px 12px; font-size: 11px; font-weight: 800; letter-spacing: .4px; color: var(--mut);
+  border-bottom: 1px solid var(--ln); white-space: nowrap;
+}
+.lista td { padding: 9px 12px; border-bottom: 1px solid var(--ln); white-space: nowrap; }
+.lista tbody tr { cursor: pointer; }
+.lista tbody tr:hover { background: var(--chip); }
+.lista tbody tr.sel { background: var(--evbg); }
+.lista td.tit { font-weight: 700; max-width: 220px; overflow: hidden; text-overflow: ellipsis; }
+.lista td.lista-corta { max-width: 170px; overflow: hidden; text-overflow: ellipsis; }
+.lista td a { color: var(--link); font-weight: 600; }
+.lista .lista-urgente { color: var(--hot); font-weight: 700; }
+.lista input[type="checkbox"] { width: 16px; height: 16px; cursor: pointer; }
+.lote-bar {
+  position: fixed; left: 50%; transform: translateX(-50%); bottom: 16px; z-index: 40;
+  display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+  background: var(--sup); color: var(--tx); border: 1px solid var(--ln);
+  border-radius: 12px; padding: 10px 14px; max-width: calc(100vw - 24px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, .28);
+}
+.lote-bar select, .lote-bar input {
+  padding: 6px 9px; border: 1px solid var(--ln); border-radius: 7px;
+  background: var(--chip); color: var(--tx); font-family: inherit; font-size: 13px;
+}
+.lote-bar input { width: 140px; }
+
+/* ---- Relatórios (admin) ---- */
+.rel { padding: 18px 20px 28px; color: var(--tx); }
+.rel h2 { margin: 0 0 14px; color: var(--petroleo); }
+.rel-barra { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-bottom: 6px; }
+.rel-pill {
+  border: 1px solid var(--ln); background: var(--sup); color: var(--tx);
+  padding: 6px 13px; border-radius: 999px; font-family: inherit; font-size: 13px; font-weight: 600;
+}
+.rel-pill:hover { background: var(--chip); }
+.rel-pill.on { background: var(--cta); border-color: var(--cta); color: var(--cta-texto); }
+.rel-datas { display: flex; align-items: center; gap: 6px; font-size: 13px; color: var(--mut); }
+.rel-datas input[type="date"] {
+  border: 1px solid var(--ln); border-radius: 7px; background: var(--sup); color: var(--tx);
+  font-family: inherit; font-size: 13px; padding: 5px 8px; color-scheme: light dark;
+}
+.rel-vs { font-size: 12px; color: var(--mut); margin: 0 0 16px; }
+
+.rel-kpis { display: grid; grid-template-columns: repeat(auto-fill, minmax(168px, 1fr)); gap: 12px; margin-bottom: 18px; }
+.rel-kpi { background: var(--sup); border: 1px solid var(--ln); border-radius: 12px; padding: 12px 14px; }
+.rel-kpi .k-lbl { font-size: 11px; font-weight: 800; letter-spacing: .4px; color: var(--mut); }
+.rel-kpi .k-val { font-size: 24px; font-weight: 800; margin-top: 5px; line-height: 1.15; word-break: break-word; }
+.rel-kpi .k-delta { font-size: 12px; font-weight: 700; margin-top: 4px; }
+.rel-kpi .k-delta.melhor { color: var(--ok); }
+.rel-kpi .k-delta.pior { color: var(--hot); }
+.rel-kpi .k-delta.igual { color: var(--mut); font-weight: 600; }
+
+.rel-sec { background: var(--sup); border: 1px solid var(--ln); border-radius: 12px; padding: 14px 16px; margin-bottom: 16px; }
+.rel-sec h3 { margin: 0 0 12px; font-size: 14px; color: var(--petroleo); }
+.rel-scroll { overflow-x: auto; }
+table.rel-tab { width: 100%; border-collapse: collapse; font-size: 13px; min-width: 520px; }
+table.rel-tab th {
+  text-align: left; padding: 8px 10px; font-size: 11px; font-weight: 800; letter-spacing: .4px; color: var(--mut);
+  border-bottom: 1px solid var(--ln); white-space: nowrap;
+}
+table.rel-tab td { padding: 8px 10px; border-bottom: 1px solid var(--ln); white-space: nowrap; color: var(--tx); }
+table.rel-tab td.num, table.rel-tab th.num { text-align: right; }
+table.rel-tab tr:last-child td { border-bottom: none; }
+.rel-mini { height: 6px; border-radius: 3px; background: var(--chip); overflow: hidden; min-width: 70px; }
+.rel-mini i { display: block; height: 100%; background: var(--evfg); }
+
+.rel-bh { display: grid; grid-template-columns: minmax(90px, 1fr) 3fr auto; gap: 7px 10px; align-items: center; font-size: 13px; }
+.rel-bh .bh-lbl { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--tx); }
+.rel-bh .bh-track { height: 14px; border-radius: 4px; background: var(--chip); overflow: hidden; }
+.rel-bh .bh-track i { display: block; height: 100%; background: var(--evfg); }
+.rel-bh .bh-val { color: var(--mut); font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+.rel-legenda { display: flex; flex-wrap: wrap; gap: 14px; font-size: 12px; color: var(--mut); margin-bottom: 8px; }
+.rel-legenda span { display: inline-flex; align-items: center; gap: 6px; }
+.rel-legenda i { width: 14px; height: 3px; border-radius: 2px; display: inline-block; }
+
+.rel-insights { list-style: none; margin: 0; padding: 0; display: grid; gap: 9px; }
+.rel-insights li { display: flex; gap: 9px; align-items: flex-start; font-size: 13.5px; color: var(--tx); line-height: 1.45; }
+.rel-insights li b { font-weight: 800; }
+.rel-insights .ponto { flex-shrink: 0; line-height: 1.45; }
+.rel-insights .ponto.ok { color: var(--ok); }
+.rel-insights .ponto.hot { color: var(--hot); }
+.rel-insights .ponto.neutro { color: var(--evfg); }
+
+@media (max-width: 768px) {
+  .rel { padding: 14px 12px 24px; }
+  .rel-kpis { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 9px; }
+  .rel-pill { min-height: 40px; }
+  .rel-bh { grid-template-columns: minmax(72px, 1fr) 2fr auto; }
+}
+
+/* Relatórios: cabeçalho de seção com busca, selects de recorte, linha agregada */
+.rel-sec-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 12px; }
+.rel-sec-head h3 { margin: 0; }
+.rel-filtro {
+  border: 1px solid var(--ln); border-radius: 999px; background: var(--chip); color: var(--tx);
+  font-family: inherit; font-size: 12.5px; padding: 5px 12px; width: 150px; max-width: 45%;
+}
+.rel-filtro::placeholder { color: var(--mut); }
+.rel-filtro:focus { outline: none; border-color: var(--evfg); }
+.rel-sel {
+  border: 1px solid var(--ln); border-radius: 999px; background: var(--sup); color: var(--tx);
+  font-family: inherit; font-size: 13px; font-weight: 600; padding: 6px 11px; max-width: 230px;
+}
+table.rel-tab tr.rel-agregada td { background: var(--chip); font-weight: 800; }
