@@ -115,7 +115,7 @@ export default function Leads() {
                       {(l.tags_csv || '').split(', ').filter(Boolean).slice(0, 3).map((t) => <span key={t} className="tag">{t}</span>)}
                       {(l.tags_csv || '').split(', ').filter(Boolean).length > 3 && <span className="muted">+{(l.tags_csv || '').split(', ').filter(Boolean).length - 3}</span>}
                     </td>
-                    <td>{l.abertas ? <span className="badge estado-vendida">{l.abertas} aberta{l.abertas > 1 ? 's' : ''}</span> : <span className="muted">—</span>}</td>
+                    <td>{l.abertas ? <span className="badge estado-vendida">{l.abertas} aberta{l.abertas > 1 ? 's' : ''}</span> : <span className="muted">-</span>}</td>
                     <td className="td-data">{dataCurta(l.criado_em)}</td>
                   </tr>
                 ))}

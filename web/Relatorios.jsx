@@ -26,11 +26,11 @@ function presets() {
   ];
 }
 
-// Win rate só existe quando houve fechamento; sem isso o valor é ausente ('—'),
+// Win rate só existe quando houve fechamento; sem isso o valor é ausente ('-'),
 // nunca zero (zero significaria "fechou e não vendeu nada").
 const winRate = (vend, perd) => (vend + perd > 0 ? Math.round((vend / (vend + perd)) * 100) : null);
 const num = (n) => (Number(n) || 0).toLocaleString('pt-BR');
-const pctTxt = (v) => (v == null ? '—' : v + '%');
+const pctTxt = (v) => (v == null ? '-' : v + '%');
 
 // Minusculas e sem acento, para a busca das tabelas casar "Festas" com "festa".
 // Exportado: a aba Campanhas usa a mesma busca nas três tabelas dela.
@@ -38,7 +38,7 @@ export const norm = (s) => String(s || '').toLowerCase().normalize('NFD').replac
 
 // Fatia do total, inteira. Entre 0 e 1 vira "<1%" para não sumir como "0%".
 function pctDoTotal(v, total) {
-  if (!(total > 0)) return '—';
+  if (!(total > 0)) return '-';
   const p = (v / total) * 100;
   if (p <= 0) return '0%';
   return p < 1 ? '<1%' : Math.round(p) + '%';
@@ -64,7 +64,7 @@ function linhaTodasLPs(origens) {
 
 // Minutos -> texto curto legível ("42min", "3h 10min", "2d 4h").
 function duracaoMin(min) {
-  if (min == null) return '—';
+  if (min == null) return '-';
   const m = Math.round(min);
   if (m < 60) return m + 'min';
   const h = Math.floor(m / 60);
@@ -72,7 +72,7 @@ function duracaoMin(min) {
   const d = Math.floor(h / 24);
   return d + 'd' + (h % 24 ? ' ' + (h % 24) + 'h' : '');
 }
-const dias = (v) => (v == null ? '—' : v.toLocaleString('pt-BR', { maximumFractionDigits: 1 }) + (v === 1 ? ' dia' : ' dias'));
+const dias = (v) => (v == null ? '-' : v.toLocaleString('pt-BR', { maximumFractionDigits: 1 }) + (v === 1 ? ' dia' : ' dias'));
 
 // Reais em rótulo de eixo, curto o bastante para não empilhar ("18k", "1,2M").
 function brlCurto(v) {

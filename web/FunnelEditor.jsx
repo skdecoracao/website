@@ -195,7 +195,7 @@ export default function FunnelEditor() {
                       <input defaultValue={(f.opcoes || []).join(', ')} placeholder="opção 1, opção 2..."
                         onBlur={(e) => salvaCampo(f, { opcoes: e.target.value.split(',').map((x) => x.trim()).filter(Boolean) })}
                         style={{ width: '100%', padding: 6, border: '1px solid var(--linha)', borderRadius: 6 }} />
-                    ) : <span className="muted">—</span>}
+                    ) : <span className="muted">-</span>}
                   </td>
                   <td><button className="btn danger sm" disabled={busy} onClick={() => removeCampo(f)}>Remover</button></td>
                 </tr>

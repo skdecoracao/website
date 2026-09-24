@@ -60,7 +60,7 @@ function Campo({ def, valor, onSave }) {
       <div className="kv">
         <label>{def.label}</label>
         <select value={v} onChange={(e) => { setV(e.target.value); onSave(e.target.value); }}>
-          <option value="">—</option>
+          <option value="">-</option>
           {(def.opcoes || []).map((o) => <option key={o} value={o}>{o}</option>)}
         </select>
       </div>
@@ -185,7 +185,7 @@ export default function Deal() {
           <div className="kv">
             <label>Qualificação</label>
             <select value={deal.qualificacao || ''} onChange={(e) => salvaDeal({ qualificacao: e.target.value })}>
-              <option value="">—</option>
+              <option value="">-</option>
               {QUALIF.map((q) => <option key={q} value={q}>{q}</option>)}
             </select>
           </div>

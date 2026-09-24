@@ -52,7 +52,7 @@ export default function Lixeira() {
                 <td>{it.lead_nome || <span className="muted">sem lead</span>}</td>
                 <td>{it.pipeline_nome || '?'}{it.stage_nome ? ' / ' + it.stage_nome : ''}</td>
                 <td>{brl(it.valor)}</td>
-                <td>{it.apagada_por_nome || '—'}</td>
+                <td>{it.apagada_por_nome || '-'}</td>
                 <td>{quando(it.apagada_em)}</td>
                 <td>{it.dias_restantes <= 0 ? 'hoje' : `${it.dias_restantes} dia${it.dias_restantes > 1 ? 's' : ''}`}</td>
                 <td><button className="btn sm primary" disabled={busy === it.id} onClick={() => restaura(it)}>{busy === it.id ? 'Restaurando…' : 'Restaurar'}</button></td>

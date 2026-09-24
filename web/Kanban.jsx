@@ -562,19 +562,19 @@ export default function Kanban({ admin }) {
                       </td>
                       <td className="tit" title={d.titulo || d.lead_nome}>{d.titulo || d.lead_nome || 'Sem título'}</td>
                       <td>{d.etapa}</td>
-                      <td>{festa ? <span className={festa.urgente && festa.dias >= 0 ? 'lista-urgente' : ''}>{festa.fmt}{festa.emTxt ? ' · ' + festa.emTxt : ''}</span> : <span className="ev-sem">—</span>}</td>
-                      <td className="lista-corta" title={d.tema || ''}>{d.tema || '—'}</td>
-                      <td className="lista-corta" title={d.pacote || ''}>{pacoteCurto(d.pacote) || '—'}</td>
+                      <td>{festa ? <span className={festa.urgente && festa.dias >= 0 ? 'lista-urgente' : ''}>{festa.fmt}{festa.emTxt ? ' · ' + festa.emTxt : ''}</span> : <span className="ev-sem">-</span>}</td>
+                      <td className="lista-corta" title={d.tema || ''}>{d.tema || '-'}</td>
+                      <td className="lista-corta" title={d.pacote || ''}>{pacoteCurto(d.pacote) || '-'}</td>
                       <td><TempDots deal={d} /></td>
                       <td><span className={'par-chip' + (parado >= ALERTA_PARADO_DIAS ? ' alerta' : '')}>{parado + 'd'}</span></td>
-                      <td className="lista-corta" title={d.prox_tarefa_titulo || ''}>{d.prox_tarefa_titulo || '—'}</td>
+                      <td className="lista-corta" title={d.prox_tarefa_titulo || ''}>{d.prox_tarefa_titulo || '-'}</td>
                       <td onClick={(e) => e.stopPropagation()}>
                         {soTelefone(d.lead_telefone)
                           ? <a href={waLink(d.lead_telefone)} target="_blank" rel="noreferrer">{d.lead_telefone}</a>
-                          : '—'}
+                          : '-'}
                       </td>
-                      <td>{d.valor > 0 ? brl(d.valor) : '—'}</td>
-                      <td className="lista-corta" title={d.lead_origem || ''}>{d.lead_origem || '—'}</td>
+                      <td>{d.valor > 0 ? brl(d.valor) : '-'}</td>
+                      <td className="lista-corta" title={d.lead_origem || ''}>{d.lead_origem || '-'}</td>
                     </tr>
                   );
                 })}

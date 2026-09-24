@@ -343,7 +343,7 @@ table.tab-tarefas .nowrap { white-space: nowrap; }
 
 .deal-grid { display: grid; grid-template-columns: 340px 1fr; gap: 18px; padding: 18px; }
 .panel { background: var(--superficie); border-radius: var(--radius); box-shadow: var(--sombra); padding: 16px; border: 1px solid var(--borda); }
-.panel h3 { margin: 0 0 12px; font-size: 14px; color: var(--petroleo); }
+.panel h3 { margin: 0 0 12px; font-size: 19px; color: var(--petroleo); }
 .panel h3.mt { margin-top: 22px; }
 
 /* Bloco de proveniência (Origem) na negociação e no lead */
@@ -596,7 +596,7 @@ table.tab tbody tr:hover { background: var(--coluna); cursor: pointer; }
 .rel-kpi .k-delta.igual { color: var(--mut); font-weight: 600; }
 
 .rel-sec { background: var(--sup); border: 1px solid var(--ln); border-radius: 12px; padding: 14px 16px; margin-bottom: 16px; }
-.rel-sec h3 { margin: 0 0 12px; font-size: 14px; color: var(--petroleo); }
+.rel-sec h3 { margin: 0 0 12px; font-size: 19px; color: var(--petroleo); }
 .rel-scroll { overflow-x: auto; }
 table.rel-tab { width: 100%; border-collapse: collapse; font-size: 13px; min-width: 520px; }
 table.rel-tab th {

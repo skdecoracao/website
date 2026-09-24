@@ -192,7 +192,7 @@ export function PurchasesList({ leadId }) {
               <thead><tr><th>Produto</th><th>Valor</th><th>Data</th><th>Origem</th></tr></thead>
               <tbody>
                 {compras.map((c) => (
-                  <tr key={c.id}><td>{c.produto}</td><td>{brl(c.valor)}</td><td>{c.data ? dataHora(c.data) : '—'}</td><td>{c.origem}</td></tr>
+                  <tr key={c.id}><td>{c.produto}</td><td>{brl(c.valor)}</td><td>{c.data ? dataHora(c.data) : '-'}</td><td>{c.origem}</td></tr>
                 ))}
               </tbody>
             </table>

@@ -175,19 +175,19 @@ export default function Tarefas() {
                     {t.descricao && <div className="muted t-desc">{t.descricao}</div>}
                   </td>
                   <td className="nowrap">
-                    {t.due_at ? <span className={t.atrasada ? 'txt-atrasada' : ''}>{dataCurta(t.due_at)}</span> : <span className="muted">—</span>}
+                    {t.due_at ? <span className={t.atrasada ? 'txt-atrasada' : ''}>{dataCurta(t.due_at)}</span> : <span className="muted">-</span>}
                   </td>
                   <td>
-                    {t.lead_id || t.deal_id ? (t.lead_nome || <span className="muted">—</span>) : <span className="muted">—</span>}
+                    {t.lead_id || t.deal_id ? (t.lead_nome || <span className="muted">-</span>) : <span className="muted">-</span>}
                     <TelefoneCopiavel tel={t.lead_telefone} />
                   </td>
                   <td>
                     {t.deal_id
                       ? <a href={'#'} onClick={(e) => { e.preventDefault(); nav('/deals/' + t.deal_id); }}>{t.deal_titulo || t.lead_nome || 'Negociação'}</a>
-                      : <span className="muted">—</span>}
+                      : <span className="muted">-</span>}
                   </td>
-                  <td className="muted">{t.funil ? `${t.funil} · ${t.etapa}` : '—'}</td>
-                  <td className="muted">{t.criador || '—'}</td>
+                  <td className="muted">{t.funil ? `${t.funil} · ${t.etapa}` : '-'}</td>
+                  <td className="muted">{t.criador || '-'}</td>
                 </tr>
               ))}
             </tbody>
