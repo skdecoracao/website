@@ -227,7 +227,7 @@ INSERT INTO stages (pipeline_id, nome, ordem, is_won, is_lost) VALUES
 INSERT INTO deal_field_defs (pipeline_id, chave, label, tipo, opcoes, ordem) VALUES
   (1, 'data_festa', 'Data da festa', 'date', NULL, 0),
   (1, 'tema', 'Tema', 'text', NULL, 1),
-  (1, 'pacote', 'Pacote', 'select', '["Kit Festa na Mesa (R$ 85)","Kit Festa na Mesa Completo (R$ 170)","Decoração Completa (R$ 550)"]', 2),
+  (1, 'pacote', 'Pacote', 'select', '["Kit Festa na Mesa (R$ 85)","Kit Festa na Mesa Completo (R$ 170)","Decoração Essencial (R$ 300)","Decoração Completa (R$ 550)"]', 2),
   (1, 'entrega', 'Retirada ou montagem', 'select', '["Retirada","Montagem no local"]', 3),
   (1, 'local', 'Bairro / cidade', 'text', NULL, 4);
 
@@ -236,6 +236,7 @@ INSERT INTO deal_field_defs (pipeline_id, chave, label, tipo, opcoes, ordem) VAL
 INSERT INTO tags (workspace_id, nome) VALUES
   (1, 'Kit Festa na Mesa'),
   (1, 'Kit Completo'),
+  (1, 'Decoração Essencial'),
   (1, 'Decoração Completa'),
   (1, 'Tema fora do estoque'),
   (1, 'Instagram'),

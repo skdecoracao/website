@@ -157,7 +157,7 @@ export function LostModal({ onConfirm, onCancel }) {
 }
 
 // Produtos da SK (mesmos pacotes da LP) para registrar uma compra à mão.
-const PRODUTOS = ['Kit Festa na Mesa', 'Kit Festa na Mesa Completo', 'Decoração Completa', 'Outro'];
+const PRODUTOS = ['Kit Festa na Mesa', 'Kit Festa na Mesa Completo', 'Decoração Essencial', 'Decoração Completa', 'Outro'];
 
 export function PurchasesList({ leadId }) {
   const [compras, setCompras] = useState(null);

@@ -164,7 +164,12 @@
   var campoNome = document.getElementById("nome");
   var campoZap = document.getElementById("whatsapp");
   var campoEmail = document.getElementById("email");
-  var campoTema = document.getElementById("tema");
+  var campoData = document.getElementById("data-festa");
+  /* Não deixa escolher data que já passou (data local do aparelho) */
+  try {
+    var hoje = new Date();
+    campoData.min = hoje.getFullYear() + "-" + ("0" + (hoje.getMonth() + 1)).slice(-2) + "-" + ("0" + hoje.getDate()).slice(-2);
+  } catch (e) { /* sem data mínima */ }
   var campoMel = document.getElementById("apelido");
   var blocoSucesso = document.getElementById("form-sucesso");
   var linkSucesso = document.getElementById("link-sucesso");
@@ -216,13 +221,15 @@
 
     if (!validar()) return;
 
-    var tema = campoTema.value.trim();
+    /* Data da festa: o input date entrega AAAA-MM-DD (vai assim para o CRM) */
+    var dataFesta = /^\d{4}-\d{2}-\d{2}$/.test(campoData.value) ? campoData.value : "";
+    var dataTexto = dataFesta ? dataFesta.split("-").reverse().join("/") : "a combinar";
     var mensagem =
       "Olá, SK Decorações! Meu nome é " + campoNome.value.trim() + ". " +
       "Quero um orçamento de decoração. " +
       "Meu WhatsApp: " + campoZap.value.trim() + ". " +
       "E-mail: " + campoEmail.value.trim() + ". " +
-      "Tema/data: " + (tema !== "" ? tema : "a combinar") + ".";
+      "Data da festa: " + dataTexto + ".";
 
     var url = "https://wa.me/" + TELEFONE + "?text=" + encodeURIComponent(mensagem);
 
@@ -238,7 +245,7 @@
           nome: campoNome.value.trim(),
           telefone: campoZap.value.trim(),
           email: campoEmail.value.trim(),
-          tema: tema,
+          data_festa: dataFesta,
           apelido: campoMel ? campoMel.value : "",
           rastreio: rastreio
         }),
@@ -246,7 +253,7 @@
       }).catch(function () { /* falhou: o WhatsApp abre do mesmo jeito */ });
     } catch (e) { /* navegador sem fetch: segue para o WhatsApp */ }
 
-    rastrearEvento("Lead", tema !== "" ? { tema: tema.slice(0, 100) } : {});
+    rastrearEvento("Lead", { tem_data_festa: dataFesta !== "" });
 
     if (linkSucesso) linkSucesso.href = url;
 

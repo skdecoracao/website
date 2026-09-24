@@ -1543,6 +1543,7 @@ async function ingestLead(db, b) {
 const PACOTES = [
   'Kit Festa na Mesa (R$ 85)',
   'Kit Festa na Mesa Completo (R$ 170)',
+  'Decoração Essencial (R$ 300)',
   'Decoração Completa (R$ 550)',
 ];
 const CAMPOS_PADRAO = [

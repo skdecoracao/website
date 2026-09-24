@@ -32,6 +32,9 @@ export async function onRequestPost({ request, env }) {
   const telefone = texto(b.telefone, 30);
   const digitos = telefone.replace(/\D/g, '');
   const email = texto(b.email, 160).toLowerCase();
+  // Data da festa vem do input date (AAAA-MM-DD) e alimenta o calendário do CRM.
+  const dataBruta = texto(b.data_festa, 10);
+  const dataFesta = /^\d{4}-\d{2}-\d{2}$/.test(dataBruta) && !Number.isNaN(Date.parse(dataBruta)) ? dataBruta : '';
   const tema = texto(b.tema, 200);
   if (nome.length < 2) return resposta(400, { ok: false, erro: 'nome' });
   if (digitos.length < 10 || digitos.length > 13) return resposta(400, { ok: false, erro: 'telefone' });
@@ -40,10 +43,10 @@ export async function onRequestPost({ request, env }) {
   if (!env.CRM_INGEST_TOKEN) return resposta(503, { ok: false, erro: 'CRM não configurado' });
 
   const r = { origem: 'site', funil: 'Vendas', tags: ['Site'], nome, telefone, email: email || undefined, botao: 'formulario' };
-  if (tema) {
-    r.campos = { tema };
-    r.mensagem = tema;
-  }
+  const campos = {};
+  if (dataFesta) campos.data_festa = dataFesta;
+  if (tema) { campos.tema = tema; r.mensagem = tema; }
+  if (Object.keys(campos).length) r.campos = campos;
   const rastreio = b.rastreio && typeof b.rastreio === 'object' ? b.rastreio : {};
   for (const k of RASTREIO) {
     const v = texto(rastreio[k], 500);

@@ -1041,8 +1041,8 @@ a { color: var(--ouro-forte); }
   .selo-flutuante { left: -18px; bottom: 24px; }
 
   .cartoes { grid-template-columns: repeat(3, 1fr); }
-  .kits { grid-template-columns: repeat(3, 1fr); gap: 26px; }
-  .galeria { grid-template-columns: repeat(3, 1fr); gap: 26px; }
+  .kits { grid-template-columns: repeat(2, 1fr); gap: 26px; }
+  .galeria { grid-template-columns: repeat(5, 1fr); gap: 20px; }
 
   .quem { grid-template-columns: 300px 1fr; gap: 54px; }
   .retrato { width: 300px; }
@@ -1064,3 +1064,6 @@ h1 .sobrancelha {
 
 /* Foto do Kit Festa na Mesa: enquadra a mesa e deixa de fora o fundo do local */
 .kit__foto--baixo img { object-position: 50% 62%; }
+
+/* Campo de data: no iPhone o input date encolhe e fica sem altura */
+.campo input[type="date"] { -webkit-appearance: none; appearance: none; min-height: 48px; display: block; width: 100%; }
