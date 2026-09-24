@@ -126,3 +126,10 @@ para qualquer hospedagem de arquivos estáticos, como o Cloudflare Pages.
 - Para publicar uma alteração: `./publicar-cloudflare.sh` (lê os tokens do cofre local, nunca do repositório).
 - `pos-dns.sh` foi o fechamento da migração do domínio (Search Console, sitemap, IndexNow e redirecionamento da Vercel antiga).
 - Não apagar `google7e5729a4f7b26562.html`, a meta `google-site-verification` nem o arquivo `.txt` do IndexNow: são as provas de posse no Google e no Bing.
+
+## CRM (pasta `crm/`)
+
+- O CRM da SK roda em https://crm.skdecoracao.com.br (Worker `sk-crm` e banco D1 `sk-crm-db` na conta Cloudflare da Sarah).
+- O código fica em `crm/`. Para publicar: `cd crm && npm ci && npm run deploy` (com `CLOUDFLARE_API_TOKEN` e `CLOUDFLARE_ACCOUNT_ID` da conta da Sarah; o script `checa-conta` bloqueia outra conta).
+- A pasta `crm/` não entra no site: `publicar-cloudflare.sh` só publica os arquivos da LP e a função `functions/api/lead.js`.
+- Contrato da entrada de leads em `crm/API.md`.
