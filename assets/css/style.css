@@ -1061,3 +1061,6 @@ h1 .sobrancelha {
   line-height: 1.6;
   margin-bottom: .9rem;
 }
+
+/* Foto do Kit Festa na Mesa: enquadra a mesa e deixa de fora o fundo do local */
+.kit__foto--baixo img { object-position: 50% 62%; }
