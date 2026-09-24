@@ -7,7 +7,7 @@
 set -e
 cd "$(dirname "$0")"
 rm -rf dist && mkdir dist
-cp -R index.html assets robots.txt sitemap.xml llms.txt _headers google7e5729a4f7b26562.html dist/
+cp -R index.html assets robots.txt sitemap.xml llms.txt _headers google7e5729a4f7b26562.html favicon.ico favicon-48.png favicon-96.png apple-touch-icon.png icon-192.png icon-512.png site.webmanifest dist/
 cp ./*[0-9a-f].txt dist/ 2>/dev/null || true
 [ -f functions/api/lead.js ] || { echo "faltou functions/api/lead.js"; exit 1; }
 set -a; . "$HOME/.secrets/duarte.env"; set +a
