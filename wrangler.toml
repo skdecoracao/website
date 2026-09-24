@@ -20,12 +20,11 @@ workers_dev = false
 routes = [{ pattern = "crm.skdecoracao.com.br", custom_domain = true }]
 
 # Varredura horária do motor de temperatura e da lixeira (src/qualif.js).
-# DESLIGADA por ora: a Cloudflare recusa cron em conta sem subdomínio
-# workers.dev (erro 10063, medido em 24/09/2026), e esta conta não tem um.
-# Enquanto isso, a varredura roda por POST /api/cron/qualificacao (Bearer
-# CRM_INGEST_TOKEN). Criado o subdomínio, descomentar as duas linhas abaixo.
-# [triggers]
-# crons = ["0 * * * *"]
+# A Cloudflare só aceita cron em conta com subdomínio workers.dev: criado em
+# 24/09/2026 (skdecoracao.workers.dev). O Worker segue com workers_dev = false,
+# então o CRM não responde por lá.
+[triggers]
+crons = ["0 * * * *"]
 
 [assets]
 directory = "dist"
