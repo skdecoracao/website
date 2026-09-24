@@ -1,0 +1,42 @@
+# CRM SK Decorações (decoração de festas, Belo Horizonte).
+#
+# Conta Cloudflare da SK Decorações (f34a691822e7992e1719428ed1ff279a), NUNCA a
+# da eKarts. O login do wrangler desta máquina é da eKarts, então aqui só se
+# chega por token. Antes de qualquer wrangler:
+#   set -a; . ~/.secrets/duarte.env; set +a
+#   export CLOUDFLARE_API_TOKEN="$CLOUDFLARE_SARAH_CRM_TOKEN"
+#   export CLOUDFLARE_ACCOUNT_ID="$CLOUDFLARE_SARAH_ACCOUNT_ID"
+# O npm run deploy roda scripts/checa-conta.mjs antes e barra se a conta for outra.
+#
+# Segredos (wrangler secret put, espelhados no cofre como SK_CRM_*):
+#   SESSION_SECRET    assina o cookie de sessão
+#   CRM_INGEST_TOKEN  Bearer da entrada de leads (/api/ingest/lead) e do gatilho manual da varredura
+#   RESEND_API_KEY    opcional, não usado hoje: o CRM não envia e-mail
+name = "sk-crm"
+main = "src/index.js"
+compatibility_date = "2025-01-01"
+account_id = "f34a691822e7992e1719428ed1ff279a"
+workers_dev = false
+routes = [{ pattern = "crm.skdecoracao.com.br", custom_domain = true }]
+
+# Varredura horária do motor de temperatura e da lixeira (src/qualif.js).
+# A Cloudflare só aceita cron em conta com subdomínio workers.dev: criado em
+# 24/09/2026 (skdecoracao.workers.dev). O Worker segue com workers_dev = false,
+# então o CRM não responde por lá.
+[triggers]
+crons = ["0 * * * *"]
+
+[assets]
+directory = "dist"
+binding = "ASSETS"
+not_found_handling = "single-page-application"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "sk-crm-db"
+database_id = "49d88cf5-54cc-4c79-8346-77bcd6c526d2"
+
+# Workers Logs: registro por invocação, 7 dias, pesquisável no painel.
+[observability]
+enabled = true
+head_sampling_rate = 1

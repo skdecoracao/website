@@ -1,0 +1,109 @@
+/* ================================================================
+   Tokens de cor e fonte do CRM SK Decorações.
+
+   Paleta da marca da SK (a mesma da LP skdecoracao.com.br, arquivo
+   sk-decoracoes-lp/assets/css/style.css). ESTE é o único arquivo com cor
+   cravada: styles.css e os componentes só leem as variáveis daqui.
+
+   Ferramenta de trabalho do dia inteiro: a prioridade é ler bem. Por isso,
+   além das cores da marca, há alguns derivados escuros (borda, alerta, texto
+   sobre dourado) escolhidos para passar contraste AA sobre o creme e o branco.
+   Tema único (claro): a marca da SK é clara e o CRM não tem tema escuro.
+   ================================================================ */
+
+:root {
+  /* ---- marca SK ---- */
+  --creme: #F7EFE6;          /* fundo da página */
+  --superficie: #FFFBF6;     /* cards, painéis, inputs */
+  --dourado: #C9A24A;        /* botão principal, detalhes */
+  --dourado-texto: #86671F;  /* dourado para texto pequeno e links (5,2:1 sobre a superfície) */
+  --dourado-hover: #A8842F;  /* hover do botão dourado */
+  --rosa: #C97D86;           /* rosa-queimado: destaque e foco */
+  --rosa-claro: #F1D4D8;     /* fundo de chip de data e de seleção */
+  --texto: #3F3129;          /* texto principal (11:1) */
+  --texto-2: #7A6A60;        /* texto secundário (5:1) */
+  --linha: #E6D9CB;          /* divisória suave */
+
+  /* ---- derivados para legibilidade ---- */
+  --linha-forte: #A68D72;    /* contorno de card, tabela e campo (3:1 sobre a superfície) */
+  --texto-botao: #241B15;    /* texto sobre o dourado (7:1; 4,9:1 no hover) */
+  --texto-claro: #FFFBF6;    /* texto sobre fundo escuro (barra do topo, chip ativo) */
+  --creme-coluna: #EFE3D5;   /* fundo das colunas do quadro, um degrau abaixo do creme */
+  --alerta: #A4424D;         /* urgente, atrasado, perda (5,9:1) */
+  --alerta-escuro: #7F2F39;
+  --alerta-bg: #F6E3E5;
+  --ok: #2F6B45;             /* melhorou, ganho */
+  --ok-bg: #E3EFE6;
+
+  /* calendário de festas: significado fixo (texto e fundo passam AA) */
+  --cal-fechada-bg: #2F6B45;   --cal-fechada-tx: #FFFBF6;   /* verde: sinal pago (6,2:1) */
+  --cal-realizada-bg: #DCEADF; --cal-realizada-tx: #24452F; /* verde apagado: festa já feita (8:1) */
+  --cal-quase-bg: #F2D98A;     --cal-quase-tx: #3F3129;     /* amarelo: negociando (8,9:1) */
+  --cal-aberta-bg: #FFFBF6;    --cal-aberta-tx: #3F3129;    /* etapas anteriores, contorno tracejado */
+  --cal-hoje: #C97D86;         /* contorno do dia de hoje */
+
+  /* temperatura da negociação, de fria a muito quente */
+  --t1: #5B7896; --t2: #7E97AE; --t3: #C9A24A; --t4: #A85560; --t5: #8E2F3B;
+
+  /* ---- tipografia (Google Fonts, carregadas em index.html) ---- */
+  --display: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+  --corpo: 'Montserrat', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+
+  /* ---- forma ---- */
+  --radius-sm: 10px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-pill: 999px;
+  --shadow-card: 0 4px 16px rgba(63, 49, 41, .07);
+  --shadow-header: 0 2px 12px rgba(63, 49, 41, .10);
+
+  /* ================================================================
+     Nomes que o styles.css (herdado do CRM de origem) usa, apontados para a
+     paleta da SK. Não recebem cor própria: só redirecionam.
+     ================================================================ */
+  --borda: var(--linha-forte);
+  --vermelho: var(--alerta);
+  --vermelho-escuro: var(--alerta-escuro);
+  --azul: var(--dourado-texto);
+  --azul-noite: var(--texto);
+  --azul-vivo: var(--dourado);
+  --amarelo: var(--dourado);
+  --verde: var(--ok);
+  --asfalto: var(--texto);
+  --fumo: var(--creme);
+  --branco: var(--superficie);
+  --muted: var(--texto-2);
+  --faint: var(--rosa-claro);
+
+  --ciano: var(--dourado-texto);       /* acento como FUNDO (etapa atual, chip ativo), texto claro por cima */
+  --ciano-hover: var(--texto);
+  --ciano-texto: var(--texto-claro);
+  --petroleo: var(--texto);            /* títulos */
+  --azul-texto: var(--dourado-texto);  /* acento como COR DE TEXTO */
+  --cta: var(--dourado);               /* botão principal */
+  --cta-hover: var(--dourado-hover);
+  --cta-texto: var(--texto-botao);
+  --coluna: var(--creme);
+  --fundo: var(--creme);
+  --sombra: var(--shadow-card);
+  --radius: var(--radius-sm);
+  --linha-tab: var(--linha);
+  --linha-tab-forte: var(--linha-forte);
+  --sb-thumb: var(--linha-forte);
+  --sb-track: transparent;
+
+  /* quadro de negociações */
+  --pg: var(--creme);
+  --sup: var(--superficie);
+  --colbg: var(--creme-coluna);
+  --ln: var(--linha-forte);
+  --tx: var(--texto);
+  --mut: var(--texto-2);
+  --chip: var(--creme);
+  --link: var(--dourado-texto);
+  --evbg: var(--rosa-claro);           /* chip da data da festa */
+  --evfg: var(--texto);
+  --hot: var(--alerta);
+  --hotbg: var(--alerta-bg);
+  --okbg: var(--ok-bg);
+}
