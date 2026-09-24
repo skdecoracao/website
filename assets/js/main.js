@@ -6,6 +6,47 @@
 
   var TELEFONE = "5531987669094";
 
+  /* ------------------------------------- Primeiro acesso (rastreamento) --- */
+  /* Guarda de onde a pessoa veio NA PRIMEIRA visita (utm, clique de anúncio,
+     site anterior, página de entrada) e manda junto com o formulário, para o
+     CRM saber qual canal trouxe o lead. Tudo em try/catch: navegador sem
+     localStorage (aba anônima, bloqueio) simplesmente segue sem isso. */
+
+  var CHAVE_RASTREIO = "sk_primeiro_acesso";
+  var CAMPOS_URL = ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term", "fbclid", "gclid"];
+
+  function lerRastreio() {
+    try { return JSON.parse(window.localStorage.getItem(CHAVE_RASTREIO) || "null"); } catch (e) { return null; }
+  }
+
+  (function guardarPrimeiroAcesso() {
+    try {
+      if (lerRastreio()) return;
+      var params = new URLSearchParams(window.location.search);
+      var dados = {
+        referrer: document.referrer && document.referrer.indexOf(window.location.host) === -1 ? document.referrer.slice(0, 300) : "",
+        pagina_entrada: window.location.pathname + window.location.search.slice(0, 300),
+        primeiro_acesso: new Date().toISOString()
+      };
+      CAMPOS_URL.forEach(function (k) { dados[k] = (params.get(k) || "").slice(0, 300); });
+      window.localStorage.setItem(CHAVE_RASTREIO, JSON.stringify(dados));
+    } catch (e) { /* sem armazenamento: segue sem rastreio */ }
+  })();
+
+  /* Evento para o Cloudflare Zaraz (quando houver ferramenta configurada lá).
+     Nunca manda e-mail nem telefone. */
+  function rastrearEvento(nome, dados) {
+    try { if (window.zaraz && typeof window.zaraz.track === "function") window.zaraz.track(nome, dados || {}); } catch (e) { /* nada */ }
+  }
+
+  /* Clique em qualquer botão do WhatsApp: evento Contact com a origem do botão
+     (atributo data-zap no HTML). */
+  document.addEventListener("click", function (evento) {
+    var link = evento.target.closest && evento.target.closest('a[href*="wa.me"]');
+    if (!link) return;
+    rastrearEvento("Contact", { origem: link.getAttribute("data-zap") || "whatsapp" });
+  });
+
   /* ---------------------------------------------------- Menu no mobile --- */
 
   var btnMenu = document.getElementById("btn-menu");
@@ -184,6 +225,28 @@
       "Tema/data: " + (tema !== "" ? tema : "a combinar") + ".";
 
     var url = "https://wa.me/" + TELEFONE + "?text=" + encodeURIComponent(mensagem);
+
+    /* Registra o lead no CRM sem esperar a resposta: o WhatsApp abre logo em
+       seguida, dê certo ou não (keepalive mantém o envio mesmo se a aba sair). */
+    var rastreio = lerRastreio() || {};
+    rastreio.pagina = window.location.pathname;
+    try {
+      window.fetch("/api/lead", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({
+          nome: campoNome.value.trim(),
+          telefone: campoZap.value.trim(),
+          email: campoEmail.value.trim(),
+          tema: tema,
+          apelido: campoMel ? campoMel.value : "",
+          rastreio: rastreio
+        }),
+        keepalive: true
+      }).catch(function () { /* falhou: o WhatsApp abre do mesmo jeito */ });
+    } catch (e) { /* navegador sem fetch: segue para o WhatsApp */ }
+
+    rastrearEvento("Lead", tema !== "" ? { tema: tema.slice(0, 100) } : {});
 
     if (linkSucesso) linkSucesso.href = url;
 
