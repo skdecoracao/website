@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://sk-decoracoes.vercel.app/sitemap.xml
+Sitemap: https://skdecoracao.com.br/sitemap.xml
